@@ -22,3 +22,8 @@ export interface Todo {
   updatedAt: string;
   timeSpent: number;
 }
+
+export interface LoginOrRegisterProps {
+  loginOrRegister: 'login' | 'register';
+  setLoginOrRegister: React.Dispatch<React.SetStateAction<'login' | 'register'>>;
+}

@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../constants/types';
 
+const storedUserInformation = localStorage.getItem('userInformation');
+
 const initialState: User = {
-  isAuthenticated: false,
-  userInformation: null,
+  isAuthenticated: !!storedUserInformation,
+  userInformation: storedUserInformation ? JSON.parse(storedUserInformation) : null,
 };
 
 const userSlice = createSlice({
@@ -13,10 +15,14 @@ const userSlice = createSlice({
     loginSuccess(state: User, action: PayloadAction<User['userInformation']>) {
       state.isAuthenticated = true;
       state.userInformation = action.payload;
+
+      localStorage.setItem('userInformation', JSON.stringify(action.payload));
     },
     logout(state: User) {
       state.isAuthenticated = false;
       state.userInformation = null;
+
+      localStorage.removeItem('userInformation');
     },
   },
 });
