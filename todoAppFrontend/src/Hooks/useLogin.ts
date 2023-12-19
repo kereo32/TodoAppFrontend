@@ -24,7 +24,7 @@ const useLogin = (): UseLoginHook => {
 
   const login = async (credentials: LoginCredentials): Promise<void> => {
     try {
-      const response: AxiosResponse = await axios.post('http://localhost:8585/auth/login', credentials);
+      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/login', credentials);
       setLoading(true);
 
       Cookies.set('todoAppToken', response.data.token, { expires: 1 });
@@ -43,7 +43,7 @@ const useLogin = (): UseLoginHook => {
 
   const register = async (credentials: LoginCredentials): Promise<void> => {
     try {
-      const response: AxiosResponse = await axios.post('http://localhost:8585/auth/register', credentials);
+      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/register', credentials);
       setLoading(true);
       Cookies.set('todoAppToken', response.data.token, { expires: 1 });
 

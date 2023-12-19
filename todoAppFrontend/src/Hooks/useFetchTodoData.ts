@@ -30,7 +30,7 @@ const useFetchTodoData = () => {
 
         const response: AxiosResponse<ApiResponse> | void = await axios
           .post(
-            'http://localhost:8585/todo/batch',
+            'https://todoserver-febeca6a6960.herokuapp.com/todo/batch',
             { todoIds },
             {
               headers: {

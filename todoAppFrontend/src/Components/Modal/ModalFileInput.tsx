@@ -21,7 +21,7 @@ const ModalFileInput: React.FC<ModalFileInputProps> = ({ labelText, name, fileTy
         const formData = new FormData();
         formData.append('file', renamedFile);
 
-        const response = await axios.post('http://localhost:8585/todo/upload', formData, {
+        const response = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/todo/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${Cookies.get('todoAppToken')}`,
