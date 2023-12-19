@@ -1,22 +1,14 @@
-import { useDispatch } from 'react-redux';
-import { logout } from '../../Store/slices/user';
+import { useSelector } from 'react-redux';
 import useFetchTodoData from '../../Hooks/useFetchTodoData';
+import Loading from '../../Components/Loading';
+import { StoreState } from '../../constants/types';
+import TodoList from '../../Components/TodoList';
 
 const Todo: React.FC = () => {
-  const dispatch = useDispatch();
-  // const { data, error, loading } = useFetchTodoData(['657cdee985bbc9a1c87c55b8', '657cdd363e179eedd2da262d', '657cdeef85bbc9a1c87c55ba']);
+  const todoItems = useSelector((state: StoreState) => state.user.userInformation?.todoItems);
+  const { isLoading, data } = useFetchTodoData(todoItems);
 
-  return (
-    <div className="flex flex-nowrap w-full h-full justify-center items-center">
-      <button
-        onClick={() => {
-          dispatch(logout());
-        }}
-      >
-        logout
-      </button>
-    </div>
-  );
+  return <div className="flex flex-nowrap w-full h-full justify-center items-center">{data.length == 0 ? <Loading /> : <TodoList data={data} />}</div>;
 };
 
 export default Todo;

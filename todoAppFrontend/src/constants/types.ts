@@ -18,8 +18,8 @@ export interface Todo {
   thumbnailUrl: string;
   attachmentFileUrl: string;
   isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
+  creationDate: string;
+  lastUpdateDate: string;
   timeSpent: number;
 }
 
