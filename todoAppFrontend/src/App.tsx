@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Login, Todo } from './Pages';
 import { useSelector } from 'react-redux';
 import { StoreState } from './constants/types';
+import React from 'react';
 
 function App() {
   const isAuthenticated = useSelector((state: StoreState) => state.user.isAuthenticated);

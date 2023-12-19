@@ -6,15 +6,14 @@ interface ModalFileInputProps {
   labelText: string;
   name: string;
   fileType: string[];
-  fileState: File | null;
-  setFileState: React.Dispatch<React.SetStateAction<File | null>>;
+  fileState: string | null;
+  setFileState: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const ModalFileInput: React.FC<ModalFileInputProps> = ({ labelText, name, fileType, setFileState }) => {
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0] || null;
     const renamedFile = selectedFile ? new File([selectedFile], 'file', { type: selectedFile.type }) : null;
-    setFileState(renamedFile);
 
     if (renamedFile) {
       try {

@@ -1,7 +1,7 @@
 import search from '/images/search.png';
 import { useState } from 'react';
 
-const Searchbox = ({ searchInput, setSearchInput }) => {
+const Searchbox: React.FC<{ searchInput: string; setSearchInput: React.Dispatch<React.SetStateAction<string>> }> = ({ searchInput, setSearchInput }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   return (

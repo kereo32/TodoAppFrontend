@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
 import FormHeader from '../Form/FormHeader';
 import useModalData from '../../Hooks/useModalData';
@@ -14,8 +15,8 @@ const AddTodoModal: React.FC<{ closeModal: () => void; todoToUpdate?: Todo }> = 
   const { modalData, handleInputChange, setModalData } = useModalData();
   const { title, description } = modalData;
   const [tags, setTags] = useState<string[]>([]);
-  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
-  const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
+  const [thumbnailFile, setThumbnailFile] = useState<string | null>(null);
+  const [attachmentFile, setAttachmentFile] = useState<string | null>(null);
 
   const { addNewTodo, loading, updateTodo } = useAddNewTodoData();
 
@@ -35,16 +36,16 @@ const AddTodoModal: React.FC<{ closeModal: () => void; todoToUpdate?: Todo }> = 
   }, [todoToUpdate, setModalData]);
 
   const handleClick = () => {
-    const data = {
+    const data: any = {
       title,
       description,
       tags,
-      attachmentFileUrl: attachmentFile,
-      thumbnailUrl: thumbnailFile,
+      attachmentFileUrl: attachmentFile || '',
+      thumbnailUrl: thumbnailFile || '',
     };
 
     if (editMode) {
-      updateTodo(todoToUpdate?._id, data);
+      updateTodo(todoToUpdate?._id || '', data);
     } else {
       addNewTodo(data);
     }
