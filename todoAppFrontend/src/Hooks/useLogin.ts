@@ -26,8 +26,8 @@ const useLogin = (): UseLoginHook => {
     try {
       const response: AxiosResponse = await axios.post('http://localhost:8585/auth/login', credentials);
       setLoading(true);
-      Cookies.set('todoAppToken', response.data.token, { expires: 1 });
 
+      Cookies.set('todoAppToken', response.data.token, { expires: 1 });
       dispatch(loginSuccess(response.data.user));
 
       setError(null);

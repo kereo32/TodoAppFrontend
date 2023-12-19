@@ -2,17 +2,19 @@ import React from 'react';
 
 interface FormButtonProps {
   onClick?: () => void;
+  type?: 'submit' | 'reset' | 'button';
   label: string;
 }
 
-const FormButton: React.FC<FormButtonProps> = ({ onClick, label }) => {
+const FormButton: React.FC<FormButtonProps> = ({ onClick, label, type }) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+    type === 'submit' ? null : e.preventDefault();
     onClick ? onClick() : null;
   };
 
   return (
     <button
+      type={type}
       onClick={(e) => {
         handleClick(e);
       }}

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../../constants/types';
+import { User, Todo } from '../../constants/types';
+import Cookies from 'js-cookie';
 
-const storedUserInformation = localStorage.getItem('userInformation');
+const userInformationFromLocalStorage = localStorage.getItem('userInformation');
 
 const initialState: User = {
-  isAuthenticated: !!storedUserInformation,
-  userInformation: storedUserInformation ? JSON.parse(storedUserInformation) : null,
+  isAuthenticated: Cookies.get('todoAppToken') ? true : false,
+  userInformation: userInformationFromLocalStorage ? JSON.parse(userInformationFromLocalStorage) : null,
 };
 
 const userSlice = createSlice({
@@ -13,6 +14,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess(state: User, action: PayloadAction<User['userInformation']>) {
+      console.log(action.payload);
       state.isAuthenticated = true;
       state.userInformation = action.payload;
 
@@ -22,10 +24,32 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.userInformation = null;
 
+      Cookies.remove('todoAppToken');
       localStorage.removeItem('userInformation');
+    },
+    addNewItemToUserTodoArray(state: User, action: PayloadAction<string>) {
+      if (state.userInformation) {
+        state.userInformation.todoIds.push(action.payload);
+      }
+
+      localStorage.setItem('userInformation', JSON.stringify(state.userInformation));
+    },
+    removeItemFromUserTodoArray(state: User, action: PayloadAction<string>) {
+      if (state.userInformation) {
+        state.userInformation.todoIds = state.userInformation.todoIds.filter((todoId: string) => todoId !== action.payload);
+      }
+
+      localStorage.setItem('userInformation', JSON.stringify(state.userInformation));
+    },
+    updateTodoInState(state: User, action: PayloadAction<Todo>) {
+      if (state.userInformation) {
+        state.userInformation.todoIds = state.userInformation.todoIds.map((todo: string) => (todo === action.payload._id ? action.payload._id : todo));
+      }
+
+      localStorage.setItem('userInformation', JSON.stringify(state.userInformation));
     },
   },
 });
 
-export const { loginSuccess, logout } = userSlice.actions;
+export const { loginSuccess, logout, addNewItemToUserTodoArray, removeItemFromUserTodoArray, updateTodoInState } = userSlice.actions;
 export default userSlice.reducer;

@@ -7,12 +7,12 @@ interface ModalHook {
   isModalOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
-  ModalComponent: ({ children }: { children: ReactNode }) => JSX.Element;
-  handleElementClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  ModalComponent: ({ children, styleContent }: { children: ReactNode; styleContent: object }) => JSX.Element;
+  handleElementClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   modalPosition: { x: number; y: number };
 }
 
-const useModal = ({ customStyle }): ModalHook => {
+const useModal = (): ModalHook => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
@@ -24,20 +24,15 @@ const useModal = ({ customStyle }): ModalHook => {
     setIsModalOpen(false);
   };
 
-  const ModalComponent = ({ children }: { children: ReactNode }): JSX.Element => (
+  const ModalComponent = ({ children, styleContent }: { children: ReactNode; styleContent: object }): JSX.Element => (
     <Modal
       isOpen={isModalOpen}
       onRequestClose={closeModal}
       style={{
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          width: '30%',
-          height: '75%',
+        content: styleContent,
+        overlay: {
+          backgroundColor: '#transparent',
+          opacity: '0.9',
         },
       }}
       contentLabel="Modal"
@@ -48,7 +43,7 @@ const useModal = ({ customStyle }): ModalHook => {
     </Modal>
   );
 
-  const handleElementClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+  const handleElementClick = (event: React.MouseEvent<HTMLElement, MouseEvent> | React.MouseEvent<HTMLImageElement>): void => {
     const rect = event.currentTarget.getBoundingClientRect();
     setModalPosition({ x: rect.left, y: rect.top });
     openModal();

@@ -1,8 +1,8 @@
 import React from 'react';
-import { FormButton, FormHeader, FormInput, FormRedirector, FormError } from './Form';
-import useFormData from '../Hooks/useFormData';
-import useLogin from '../Hooks/useLogin';
-import { LoginOrRegisterProps } from '../constants/types';
+import { FormButton, FormHeader, FormInput, FormRedirector, FormError } from '.';
+import useFormData from '../../Hooks/useFormData';
+import useLogin from '../../Hooks/useLogin';
+import { LoginOrRegisterProps } from '../../constants/types';
 
 const RegisterForm: React.FC<LoginOrRegisterProps> = ({ loginOrRegister, setLoginOrRegister }) => {
   const { formData, handleInputChange } = useFormData();

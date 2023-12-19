@@ -1,17 +1,18 @@
 export interface User {
   isAuthenticated: boolean;
   userInformation: {
-    name: string;
+    username: string;
     todoIds: string[];
+    userId: string;
   } | null;
 }
 
 export interface StoreState {
   user: User;
-  todos: Todo[];
 }
 
 export interface Todo {
+  _id: string;
   title: string;
   description: string;
   tags: string[];
@@ -19,7 +20,7 @@ export interface Todo {
   attachmentFileUrl: string;
   isActive: boolean;
   creationDate: string;
-  lastUpdateDate: string;
+  lastUpdatedDate: string;
   timeSpent: number;
 }
 

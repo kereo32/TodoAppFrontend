@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import LoginForm from '../../Components/LoginForm';
-import RegisterForm from '../../Components/RegisterForm';
+import LoginForm from '../../Components/Form/LoginForm';
+import RegisterForm from '../../Components/Form/RegisterForm';
 const Login: React.FC = () => {
   const [loginOrRegister, setLoginOrRegister] = useState<'login' | 'register'>('login');
 
