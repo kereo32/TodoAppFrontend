@@ -31,8 +31,6 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
     );
   }, [data]);
 
-  console.log(tagFilter);
-
   const { filteredData } = useDataFilter(data, [searchFilter, tagFilter], isTagFilterActive);
 
   return (

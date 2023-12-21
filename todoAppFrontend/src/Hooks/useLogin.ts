@@ -24,13 +24,12 @@ const useLogin = (): UseLoginHook => {
 
   const login = async (credentials: LoginCredentials): Promise<void> => {
     try {
-      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/login', credentials);
+      setError(null);
       setLoading(true);
+      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/login', credentials);
 
       Cookies.set('todoAppToken', response.data.token, { expires: 1 });
       dispatch(loginSuccess(response.data.user));
-
-      setError(null);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const axiosError = err as { response: { data: { message: string } } };
@@ -38,18 +37,20 @@ const useLogin = (): UseLoginHook => {
       } else {
         setError('An unexpected error occurred.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const register = async (credentials: LoginCredentials): Promise<void> => {
     try {
-      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/register', credentials);
+      setError(null);
       setLoading(true);
+      const response: AxiosResponse = await axios.post('https://todoserver-febeca6a6960.herokuapp.com/auth/register', credentials);
+
       Cookies.set('todoAppToken', response.data.token, { expires: 1 });
 
       dispatch(loginSuccess(response.data.user));
-
-      setError(null);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const axiosError = err as { response: { data: { message: string } } };
@@ -57,6 +58,8 @@ const useLogin = (): UseLoginHook => {
       } else {
         setError('An unexpected error occurred.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 

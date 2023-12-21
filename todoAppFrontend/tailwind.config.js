@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
 
   theme: {
+    screens: {
+      xs: { max: '500px' },
+    },
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],

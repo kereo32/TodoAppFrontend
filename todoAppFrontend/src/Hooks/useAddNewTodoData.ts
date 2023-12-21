@@ -73,7 +73,6 @@ const useAddNewTodoData = () => {
     }
   };
   const updateTodo = async (todoId: string, data: Todo) => {
-    console.log(todoId, data);
     try {
       setLoading(true);
       const response = await fetch(`https://todoserver-febeca6a6960.herokuapp.com/todo/${todoId}`, {
@@ -89,7 +88,6 @@ const useAddNewTodoData = () => {
         throw new Error('Failed to update todo');
       }
       const updatedTodo = await response.json();
-      console.log('updatedTodo : ', updatedTodo.todo);
       dispatch(updateTodoInState(updatedTodo.todo));
       setError(null);
     } catch (error) {
