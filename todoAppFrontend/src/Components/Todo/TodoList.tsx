@@ -36,6 +36,7 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
   return (
     <div className="flex flex-col w-[40%] h-[80%] justify-start items-center min-w-fit">
       <ModalComponent
+        type="addTodo"
         styleContent={{
           top: '50%',
           left: '50%',
@@ -56,7 +57,7 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
       <FormHeader additionalClasses={['text-3xl']} content={`${userInformation?.username}'s Todo List!`} />
       {data.length > 0 ? (
         <>
-          <div className="flex flex-row w-[100%] h-[20%] justify-between items-center ">
+          <div className="flex flex-row w-full h-[20%] justify-between items-center">
             <Searchbox searchInput={searchFilter} setSearchInput={updateSearchFilter} />
             {tagFilter.length > 0 && (
               <Tagsearch

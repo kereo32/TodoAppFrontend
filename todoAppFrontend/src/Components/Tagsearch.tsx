@@ -13,11 +13,12 @@ const Tagsearch: React.FC<{
   const { ModalComponent, handleElementClick, modalPosition, closeModal } = useModal();
 
   return (
-    <div className="flex flex-row w-[22%]">
+    <div className="flex flex-row w-[22%] xs:justify-end xs:mr-2">
       <ModalComponent
+        type="tagFilter"
         styleContent={{
-          top: modalPosition.y - 100,
-          left: modalPosition.x,
+          top: (modalPosition.y - 100).toString() + 'px',
+          left: (modalPosition.x - 50).toString() + 'px',
           width: '10%',
           height: '10%',
           padding: '0',
@@ -25,6 +26,9 @@ const Tagsearch: React.FC<{
           borderColor: '#3e71af',
           borderRadius: '0.4rem',
           boxShadow: '0 0 0 0.05rem white',
+          right: '0',
+          bottom: '0',
+          transform: 'translate(0, 0)',
         }}
       >
         <div className="flex flex-row w-full h-4 justify-between">

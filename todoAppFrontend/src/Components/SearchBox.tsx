@@ -8,9 +8,9 @@ const Searchbox: React.FC<{ searchInput: string; setSearchInput: React.Dispatch<
     <div
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      className="flex flex-row lg:w-40 sm:w-20 h-full justify-start items-center"
+      className="flex flex-row w-40 xs:w-30 h-full justify-start items-center"
     >
-      <div className="relative w-full translate-x-[80%]">
+      <div className="relative w-full translate-x-[80%] xs:translate-x-0">
         <img
           className="h-8 transition-all duration-300 transform cursor-pointer w-full"
           src={search}
@@ -20,9 +20,9 @@ const Searchbox: React.FC<{ searchInput: string; setSearchInput: React.Dispatch<
           }}
         />
         <input
-          className={`border-2 border-gray-300 rounded-md p-2 absolute ${isHovering ? 'w-[80%]' : 'w-[40%]'} top-0 left-0 transition-all duration-300 ${
-            isHovering ? 'pl-8 opacity-100' : 'opacity-0'
-          }`}
+          className={`border-2 border-gray-300 rounded-md p-2 absolute ${
+            isHovering ? 'w-[80%]' : 'w-[40%]'
+          } xs:w-full top-0 left-0 transition-all duration-300 ${isHovering ? 'pl-8 opacity-100' : 'opacity-0'}`}
           type="text"
           placeholder="Search"
           value={searchInput}

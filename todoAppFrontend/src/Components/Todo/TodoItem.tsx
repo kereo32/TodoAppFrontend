@@ -18,6 +18,7 @@ const TodoItem: React.FC<{ data: TodoItemType }> = ({
   return (
     <div className="flex flex-row w-[65%] xs:w-full min-h-fit bg-polynesian_blue-800 dark:bg-polynesian_blue-200 mt-2 rounded-lg">
       <ModalComponent
+        type="addTodo"
         styleContent={{
           top: '50%',
           left: '50%',
