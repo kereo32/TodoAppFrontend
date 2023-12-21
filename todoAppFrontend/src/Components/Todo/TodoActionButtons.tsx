@@ -9,12 +9,16 @@ const TodoActionButtons: React.FC<{ todoId: string; attachmentFileUrl: string; o
   openEditModal,
 }) => {
   const { removeTodo } = useAddNewTodoData();
-
+  const attachmentClasses = attachmentFileUrl != '' ? 'cursor-pointer opacity-100 dark:invert' : 'cursor-default opacity-50 dark:invert';
   return (
     <div className="flex flex-col w-[10%] h-full justify-evenly items-center mr-3">
-      <a target="_blank" href={attachmentFileUrl}>
-        <img className="dark:invert" src={attach} />
-      </a>
+      {attachmentFileUrl != '' ? (
+        <a target="_blank" href={attachmentFileUrl}>
+          <img className={`${attachmentClasses}`} src={attach} />
+        </a>
+      ) : (
+        <img className={`${attachmentClasses}`} src={attach} />
+      )}
       <button onClick={openEditModal}>
         <img className="dark:invert" src={edit} />
       </button>

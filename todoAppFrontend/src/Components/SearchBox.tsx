@@ -5,7 +5,11 @@ const Searchbox: React.FC<{ searchInput: string; setSearchInput: React.Dispatch<
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="flex flex-row w-40 h-full justify-start items-center">
+    <div
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      className="flex flex-row lg:w-40 sm:w-20 h-full justify-start items-center"
+    >
       <div className="relative w-full translate-x-[80%]">
         <img
           className="h-8 transition-all duration-300 transform cursor-pointer w-full"

@@ -16,7 +16,7 @@ const TodoItem: React.FC<{ data: TodoItemType }> = ({
 }) => {
   const { openModal, closeModal, ModalComponent } = useModal();
   return (
-    <div className="flex flex-row w-[65%] h-[15%] bg-polynesian_blue-800 dark:bg-polynesian_blue-200 mt-2 rounded-lg">
+    <div className="flex flex-row w-[65%] min-h-fit bg-polynesian_blue-800 dark:bg-polynesian_blue-200 mt-2 rounded-lg">
       <ModalComponent
         styleContent={{
           top: '50%',
