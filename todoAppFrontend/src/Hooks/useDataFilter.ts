@@ -6,7 +6,7 @@ type tag = {
   isActive: boolean;
 };
 
-const useDataFilter = (unfilteredData: Todo[], filterOptions: [string, { tag: string; isActive: boolean }[]]) => {
+const useDataFilter = (unfilteredData: Todo[], filterOptions: [string, { tag: string; isActive: boolean }[]], isTagFilterActive: boolean) => {
   const [filteredData, setFilteredData] = useState(unfilteredData);
 
   useEffect(() => {
@@ -17,12 +17,14 @@ const useDataFilter = (unfilteredData: Todo[], filterOptions: [string, { tag: st
         if (typeof option === 'string') {
           updatedData = updatedData.filter((item: Todo) => item.title.toLowerCase().includes(option.toLowerCase()));
         } else if (Array.isArray(option)) {
-          updatedData = updatedData.filter((item: Todo) => {
-            return item.tags.some((tag: string) => {
-              const matchingTag = option.find((filterTag) => filterTag.tag === tag);
-              return matchingTag && matchingTag.isActive;
+          if (isTagFilterActive) {
+            updatedData = updatedData.filter((item: Todo) => {
+              return item.tags.some((tag: string) => {
+                const matchingTag = option.find((filterTag) => filterTag.tag === tag);
+                return matchingTag && matchingTag.isActive;
+              });
             });
-          });
+          }
         }
       });
     }
@@ -34,7 +36,7 @@ const useDataFilter = (unfilteredData: Todo[], filterOptions: [string, { tag: st
     }
   }, [unfilteredData, filterOptions]);
 
-  return { filteredData };
+  return { filteredData, isTagFilterActive };
 };
 
 export default useDataFilter;

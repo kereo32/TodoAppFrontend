@@ -4,10 +4,12 @@ import close from '/images/close.png';
 import Tag from './Tag';
 import { Dispatch, SetStateAction } from 'react';
 
-const Tagsearch: React.FC<{ updateTagFilter: Dispatch<SetStateAction<{ tag: string; isActive: boolean }[]>>; tags: { tag: string; isActive: boolean }[] }> = ({
-  updateTagFilter,
-  tags,
-}) => {
+const Tagsearch: React.FC<{
+  updateTagFilter: Dispatch<SetStateAction<{ tag: string; isActive: boolean }[]>>;
+  tags: { tag: string; isActive: boolean }[];
+  toggleTagFilter: () => void;
+  isTagFilterActive: boolean;
+}> = ({ updateTagFilter, tags, toggleTagFilter, isTagFilterActive }) => {
   const { ModalComponent, handleElementClick, modalPosition, closeModal } = useModal();
 
   return (
@@ -25,7 +27,15 @@ const Tagsearch: React.FC<{ updateTagFilter: Dispatch<SetStateAction<{ tag: stri
           boxShadow: '0 0 0 0.05rem white',
         }}
       >
-        <div className="flex flex-row w-full h-4 justify-end">
+        <div className="flex flex-row w-full h-4 justify-between">
+          <button
+            onClick={() => {
+              toggleTagFilter();
+            }}
+            className={`w-4 m-1 ${isTagFilterActive ? 'opacity-100' : 'opacity-60'}`}
+          >
+            <img src={tag} />
+          </button>
           <button
             onClick={() => {
               closeModal();

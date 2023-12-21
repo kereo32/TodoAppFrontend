@@ -19,6 +19,7 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
   const [searchFilter, updateSearchFilter] = useState<string>('');
   const [tagFilter, updateTagFilter] = useState<{ tag: string; isActive: boolean }[]>([]);
   const { userInformation } = useSelector((state: StoreState) => state.user);
+  const [isTagFilterActive, setIsTagFilterActive] = useState(false);
 
   useEffect(() => {
     updateTagFilter(
@@ -30,7 +31,9 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
     );
   }, [data]);
 
-  const { filteredData } = useDataFilter(data, [searchFilter, tagFilter]);
+  console.log(tagFilter);
+
+  const { filteredData } = useDataFilter(data, [searchFilter, tagFilter], isTagFilterActive);
 
   return (
     <div className="flex flex-col w-[40%] h-[80%] justify-start items-center">
@@ -57,7 +60,14 @@ const TodoList: React.FC<{ data: TodoItemData[] }> = ({ data }) => {
         <>
           <div className="flex flex-row w-[100%] h-[20%] justify-between items-center">
             <Searchbox searchInput={searchFilter} setSearchInput={updateSearchFilter} />
-            {tagFilter.length > 0 && <Tagsearch tags={tagFilter} updateTagFilter={updateTagFilter} />}
+            {tagFilter.length > 0 && (
+              <Tagsearch
+                tags={tagFilter}
+                isTagFilterActive={isTagFilterActive}
+                updateTagFilter={updateTagFilter}
+                toggleTagFilter={() => setIsTagFilterActive(!isTagFilterActive)}
+              />
+            )}
           </div>
           <div className="flex flex-col w-[60%] h-[2%] items-end justify-center">
             <img onClick={openModal} className=" opacity-60 hover:opacity-100 w-[4%] hover:w-[5%] -m-2" src={plus} />
